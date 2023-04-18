@@ -14,7 +14,7 @@ import com.ds.project01.user.dto.UserDto;
 import com.ds.project01.user.service.UserService;
 
 @Controller
-public class UserController {
+public class UserController {//test
 	
 	@Autowired
     private UserService userService;

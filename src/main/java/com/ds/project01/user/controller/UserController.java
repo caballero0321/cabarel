@@ -1,5 +1,7 @@
 package com.ds.project01.user.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Controller;
@@ -16,50 +18,31 @@ import com.ds.project01.user.service.UserService;
 @Controller
 public class UserController {
 	
-	@Autowired
-    private UserService userService;
+	private UserService userService;
 	
-    @GetMapping("/user")
+	@Autowired
+    public MemberController(MemberService memberService) {
+		this.memberService = memberService;
+	}
+	
+    @GetMapping("/user/new")
     public String showUserForm(UserDto dto) {
-    	    	
+    	     	
         return "userForm";
     }
     
-    @PostMapping("/user/save") 
+    @PostMapping("/user/new") 
     public String saveUser(UserDto dto) {
     	UserEntity entity = UserEntity.toUserEntity(dto);
     	userService.insert(entity);
-    	return ""; 
+    	return "redirect:/"; 
     }
     
+    @GetMapping("/users")
+    public String list(Model model) {
+    List<User> users = userService.
+    model.addAttribute("users", users);
+    return "userList";
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-//    @PostMapping("/user")
-//    public String submitEmployeeForm(User user, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "userForm";
-//        }
-//
-//        return "userConfirmation";
-//    }
 }
